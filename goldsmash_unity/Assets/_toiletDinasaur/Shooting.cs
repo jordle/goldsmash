@@ -11,17 +11,20 @@ public class Shooting : MonoBehaviour {
 	GameObject bulletParent;
 
 	float timeToShoot;
+	float TimeToWait;
 
 	// Use this for initialization
 	void Start () {
 		timeToShoot = 0;
+		TimeToWait = UnityEngine.Random.Range(1, 4);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (timeToShoot > 3.0)
+		if (timeToShoot > TimeToWait)
 		{
 			timeToShoot = 0;
+			TimeToWait = UnityEngine.Random.Range(1, 4);
 			ShootBullet();
 		}else
 		{
@@ -31,7 +34,7 @@ public class Shooting : MonoBehaviour {
 
 	private void ShootBullet()
 	{
-		print(transform.name + "shoot");
+		//print(transform.name + "shoot");
 		GameObject go = Instantiate(bullet, bulletParent.transform) as GameObject;
 		go.transform.position = bulletParent.transform.position;
 		go.transform.rotation = bulletParent.transform.rotation;
