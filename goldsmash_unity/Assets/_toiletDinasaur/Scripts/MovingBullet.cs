@@ -6,7 +6,10 @@ public class MovingBullet : MonoBehaviour
 {
 	private const string TAG_DEFENSE = "Defence";
 	private const string TAG_GOLD = "Gold";
-
+	//[Range(0,1)]
+	[SerializeField] private float Vibration_Freq = 0.3f;
+	//[Range(0,1)]
+	[SerializeField] private float Vibration_Amp = 1;
 	[SerializeField]
 	Rigidbody myRigidbody;
 
@@ -40,8 +43,12 @@ public class MovingBullet : MonoBehaviour
 		//print(other.name);
 		if (other.tag == TAG_DEFENSE)
 		{
-			print(TAG_DEFENSE);
+			//print(TAG_DEFENSE);
 			BulletHitDefense();
+			if(other.name== "Shield")
+				GameController.instance.Vibrate( OVRInput.Controller.LTouch);
+			else
+				GameController.instance.Vibrate(OVRInput.Controller.RTouch);
 		}
 		else if (other.tag == TAG_GOLD)
 		{
@@ -55,6 +62,7 @@ public class MovingBullet : MonoBehaviour
 		AudioSource.PlayClipAtPoint(AudioManager.instance.BulletHittingGoldSound, transform.position);
 		GameController.instance.LoseCoins();
 		Destroy(gameObject, 0.1f);
+		gameObject.SetActive(false);
 	}
 
 	private void BulletHitDefense()
@@ -62,6 +70,8 @@ public class MovingBullet : MonoBehaviour
 
 		//AudioScript.gameObject.GetComponent<AudioSource>().PlayOneShot(AudioClip  Sound);
 		AudioSource.PlayClipAtPoint(AudioManager.instance.BulletHittingDefenseSound, transform.position);
+		
 		Destroy(gameObject, 0.1f);
+		gameObject.SetActive(false);
 	}
 }

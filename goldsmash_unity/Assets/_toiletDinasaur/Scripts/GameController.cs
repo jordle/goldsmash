@@ -6,6 +6,12 @@ using System;
 public class GameController : MonoBehaviour
 {
 
+	[SerializeField]
+	private float Vibration_Freq = 50f;
+	//[Range(0,1)]
+	[SerializeField]
+	private float Vibration_Amp = 1;
+
 	private const int TIME_TO_START = 10;
 	private const int TIME_TO_FINISH = 45;
 	[SerializeField]
@@ -30,6 +36,8 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private int MaxCoinsToLoose;
 
+	[SerializeField]
+	private ParticleSystem coinspray;
 
 
 	enum GameStatus
@@ -44,9 +52,16 @@ public class GameController : MonoBehaviour
 
 	static public GameController instance;
 
-	[SerializeField]
+	[SerializeField] 
 	private bool isDebug=false;
 
+	[SerializeField]
+	private float TimeToStopVibration = .5f;
+	private float ActualTimeToStopVibrationL = .5f;
+	private float ActualTimeToStopVibrationR = .5f;
+	private bool IsVibratingL;
+	private bool IsVibratingR;
+	//private OVRInput.Controller TouchToVibrate;
 
 	public void Awake()
 	{
@@ -60,18 +75,59 @@ public class GameController : MonoBehaviour
 		SetCanvasText();
 		myGameStatus = GameStatus.WaitingToStart;
 		Enemies.SetActive(false);
+		IsVibratingL = false;
+		IsVibratingR = false;
+
+
+		ActualTimeToStopVibrationL = TimeToStopVibration;
+		ActualTimeToStopVibrationR = TimeToStopVibration;
 	}
 
-	private void SetCanvasText()
+
+	public void Vibrate(OVRInput.Controller TouchCont)
 	{
-		txtCoins.text = string.Concat("Coins: ", myCoins);
-		txtTime.text = string.Concat("Time: ", Mathf.RoundToInt(timeToFinish));
-		txtMessage.text = actualMessage;
+		if (TouchCont == OVRInput.Controller.LTouch)
+		{
+			IsVibratingL = true;
+		}
+		else
+			IsVibratingR = true;
+		OVRInput.SetControllerVibration(Vibration_Freq, Vibration_Amp, TouchCont);
+
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+
+		if (IsVibratingL)
+		{
+			if (ActualTimeToStopVibrationL > 0)
+			{
+				ActualTimeToStopVibrationL -= Time.deltaTime;
+			}else
+			{
+				IsVibratingL = false;
+				ActualTimeToStopVibrationL = TimeToStopVibration;
+				OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.LTouch);
+			}
+		}
+
+		if (IsVibratingR)
+		{
+			if (ActualTimeToStopVibrationR > 0)
+			{
+				ActualTimeToStopVibrationR -= Time.deltaTime;
+			}
+			else
+			{
+				IsVibratingR = false;
+				ActualTimeToStopVibrationR = TimeToStopVibration;
+				OVRInput.SetControllerVibration(0, 0, OVRInput.Controller.RTouch);
+			}
+		}
+
+
 		if (myGameStatus == GameStatus.Starting)
 		{
 			timeToStart -= Time.deltaTime;
@@ -117,10 +173,23 @@ public class GameController : MonoBehaviour
 
 	}
 
+
+
+	private void SetCanvasText()
+	{
+		txtCoins.text = string.Concat("Coins: ", myCoins);
+		txtTime.text = string.Concat("Time: ", Mathf.RoundToInt(timeToFinish));
+		txtMessage.text = actualMessage;
+	}
+
+
 	public void LoseCoins()
 	{
 		myCoins -= UnityEngine.Random.Range(MinCoinsToLoose, MaxCoinsToLoose);
 		if (myCoins < 0)
 			myCoins = 0;
+
+	coinspray.Play();
+
 	}
 }
