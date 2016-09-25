@@ -7,34 +7,6 @@ public class MovingBullet : MonoBehaviour
 	private const string TAG_DEFENSE = "Defence";
 	private const string TAG_GOLD = "Gold";
 
-	public void OnTriggerEnter(Collider other)
-	{
-		print(other.name);
-		if (other.tag == TAG_DEFENSE)
-		{
-			print(TAG_DEFENSE);
-			DefenseDestroy();
-		}else if (other.tag == TAG_GOLD)
-		{
-			print(TAG_DEFENSE);
-			GoldDestroy();
-		}
-	}
-
-	private void GoldDestroy()
-	{
-		AudioSource.PlayClipAtPoint(AudioManager.instance.BulletHittingGoldSound,transform.position);
-		Destroy(gameObject, 0.1f);
-	}
-
-	private void DefenseDestroy()
-	{
-
-		//AudioScript.gameObject.GetComponent<AudioSource>().PlayOneShot(AudioClip  Sound);
-		AudioSource.PlayClipAtPoint(AudioManager.instance.BulletHittingDefenseSound,transform.position);
-		Destroy(gameObject, 0.1f);
-	}
-
 	[SerializeField]
 	Rigidbody myRigidbody;
 
@@ -60,5 +32,36 @@ public class MovingBullet : MonoBehaviour
 		//myZ += myVelocity * Time.deltaTime;
 		//transform.position=new Vector3(transform.position.x, transform.position.y, myZ);
 		transform.Translate(0, 0, mySpeed * Time.deltaTime);
+	}
+
+
+	public void OnTriggerEnter(Collider other)
+	{
+		//print(other.name);
+		if (other.tag == TAG_DEFENSE)
+		{
+			print(TAG_DEFENSE);
+			BulletHitDefense();
+		}
+		else if (other.tag == TAG_GOLD)
+		{
+			//print(TAG_DEFENSE);
+			BulletHitGold();
+		}
+	}
+
+	private void BulletHitGold()
+	{
+		AudioSource.PlayClipAtPoint(AudioManager.instance.BulletHittingGoldSound, transform.position);
+		GameController.instance.LoseCoins();
+		Destroy(gameObject, 0.1f);
+	}
+
+	private void BulletHitDefense()
+	{
+
+		//AudioScript.gameObject.GetComponent<AudioSource>().PlayOneShot(AudioClip  Sound);
+		AudioSource.PlayClipAtPoint(AudioManager.instance.BulletHittingDefenseSound, transform.position);
+		Destroy(gameObject, 0.1f);
 	}
 }
