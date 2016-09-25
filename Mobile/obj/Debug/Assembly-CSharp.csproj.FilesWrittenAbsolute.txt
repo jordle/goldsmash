@@ -1,0 +1,17 @@
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/obj/Debug/Assembly-CSharp.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/UnityEngine.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/UnityEditor.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Mono.Cecil.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Unity.DataContract.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/bartfransen/Development/Tutorials/GoldSmashTryout/GoldSmashTryout/Temp/bin/Debug/Mono.Cecil.Mdb.dll
