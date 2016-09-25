@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private bool isDebug=false;
 
+
 	public void Awake()
 	{
 		if (!instance)
